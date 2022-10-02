@@ -1,0 +1,6 @@
+email:
+    address: xxx # smtp.163.com:25
+    username: xxx # xxxx@163.com
+    password: xxx # code
+server:
+    port: 8080
