@@ -4,3 +4,5 @@ email:
     password: xxx # code
 server:
     port: 8080
+    rt: 5 # 读超时
+    wt: 10 # 写超时

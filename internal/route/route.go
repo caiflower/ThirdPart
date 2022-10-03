@@ -6,6 +6,7 @@ import (
 	v1 "com.caiflower/commons/thirdpart/internal/route/v1"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"time"
 )
 
 var engine *gin.Engine
@@ -22,7 +23,13 @@ func Init() (e error) {
 
 	initRouteGroup(engine)
 
-	e = engine.Run(":" + config.Port)
+	s := &http.Server{
+		Addr:         ":" + config.Port,
+		ReadTimeout:  time.Duration(config.RT * int(time.Second)),
+		WriteTimeout: time.Duration(config.WT * int(time.Second)),
+		Handler:      engine,
+	}
+	s.ListenAndServe()
 
 	return
 }

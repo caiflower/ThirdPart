@@ -8,7 +8,7 @@ import (
 
 var Path string
 var EnableENV bool
-var Config ThirdPartConfig
+var Config *ThirdPartConfig
 
 const (
 	EMAIL_SERVER_ADDRESS = "EMAIL_SERVER_ADDRESS"
@@ -30,6 +30,8 @@ type (
 
 	Server struct {
 		Port string `default:"8080"`
+		RT   int    `default:"5"`
+		WT   int    `default:"10"`
 	}
 )
 
@@ -39,7 +41,8 @@ func init() {
 }
 
 func Init() (e error) {
-	e = configor.Load(&Config, Path)
+	Config = &ThirdPartConfig{}
+	e = configor.Load(Config, Path)
 	if EnableENV {
 		Config.Address = os.Getenv(EMAIL_SERVER_ADDRESS)
 		Config.UserName = os.Getenv(EMAIL_USERNAME)

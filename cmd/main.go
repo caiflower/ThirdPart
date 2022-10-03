@@ -12,7 +12,7 @@ func main() {
 
 	// 初始化配置信息
 	if e := config.Init(); e != nil {
-		log.Fatal("config init fail")
+		log.Fatal("config init fail", e)
 	}
 
 	// 初始化路由
